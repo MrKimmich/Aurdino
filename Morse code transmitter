@@ -1,0 +1,28 @@
+void setup()
+{
+  pinMode(13, OUTPUT);
+  
+}
+
+void loop()
+{
+  int input[10] = {1, 0, 1, 0, 0, 1, 1, 1, 0, 1};  //Morse code input
+  
+  for(int i=0; i<10; ++i){
+    
+    if(input[i] == 1){
+      
+      digitalWrite(13, HIGH);   // set led light HIGH
+      delay(2000);              // Delay for 2000ms
+      digitalWrite(13, LOW);
+   
+    }
+    else{
+      
+      digitalWrite(13, HIGH);
+      delay(500);
+      digitalWrite(13, LOW);
+    
+    }
+    delay(1000);
+  }
