@@ -1,0 +1,31 @@
+// Connect output to PWM pin which can have some analog functions like ~9, ~10, ~11 etc
+
+int analogpin = A0;
+int LEDCount = 8;
+int LEDPins[] = {9, 8, 7, 6, 5, 4, 3, 2};
+
+
+void setup()
+{  
+  Serial.begin(9600);
+  
+  for(int i=0; i<LEDCount; i++){
+    pinMode(LEDPins[i], OUTPUT);
+  }
+}
+
+void loop()
+{
+  int sensorReading = analogRead(analogpin);
+  Serial.println(sensorReading*(8.0/1023.0));
+  int LEDLevel = map(sensorReading, 0, 1023, 0, LEDCount);  // Map that to levels
+  
+  for(int i=0; i<LEDCount; i++){      //Light up the levels for that voltage
+    if(LEDLevel > i){
+      digitalWrite(LEDPins[i], HIGH);
+    }else{
+      digitalWrite(LEDPins[i], LOW);
+    }
+  }
+  delay(1000);
+}
