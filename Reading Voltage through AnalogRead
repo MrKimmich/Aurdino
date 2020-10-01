@@ -1,0 +1,19 @@
+int readPin = A3;
+int V2 = 0;
+int DELAY = 500;
+int outputPin = 11;
+int maxVolt = 255 ;
+
+void setup() {
+  pinMode(readPin, INPUT);
+  Serial.begin(9600);
+  pinMode(outputPin, OUTPUT);
+}
+
+void loop() {
+  digitalWrite(outputPin, HIGH);
+  V2 = analogRead(readPin);
+  //digitalWrite(outputPin, LOW);
+  Serial.println(V2*(5.0/1023.0));
+  delay(DELAY);
+}
