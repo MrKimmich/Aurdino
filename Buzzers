@@ -1,0 +1,23 @@
+int BuzzPin = 13;
+int ReadPin = A2;
+int V2 = 0;
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(BuzzPin, OUTPUT);
+  pinMode(ReadPin, INPUT);
+}
+
+void loop() {
+  digitalWrite(ReadPin, HIGH);
+  V2 = analogRead(ReadPin);
+  
+  while(true){
+    Serial.println(V2);
+    if(V2>500){
+      digitalWrite(BuzzPin, HIGH);
+    }else{
+      digitalWrite(BuzzPin, LOW);
+    }
+  }
+}
