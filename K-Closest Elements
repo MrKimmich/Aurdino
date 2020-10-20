@@ -1,0 +1,57 @@
+// Given a sorted(non-decreasing) array A of N length, and two integers K, X. Write an efficient program to find K closest elements to X in A.
+// Note: If there is a tie between two elements in terms of closeness, choose the minimum one.
+
+
+def findPOS(A, N, X):
+    L = 0
+    H = N-1
+    while L<H:
+        M = (L+H)//2
+        if A[M]<X:
+            L = M+1
+        elif A[M]>X:
+            H = M-1
+        else:
+            return M
+    return L
+
+def KClosestElements(A, N, K, X):
+    P = findPOS(A, N, X)
+    res = []
+    S = ''
+    if A[P]==X:
+        pos1 = P-1
+        pos2 = P
+    elif A[P]<X:
+        pos1 = P
+        pos2 = P+1
+    else:
+        pos2 = P
+        pos1 = P-1
+    
+    while K>0:
+        if pos1>-1 and pos2<N:
+            if abs(A[pos1]-X)<=abs(A[pos2]-X):
+                res.append(A[pos1])
+                K -= 1
+                pos1 -= 1
+            elif abs(A[pos1]-X)>abs(A[pos2]-X):
+                res.append(A[pos2])
+                K -= 1
+                pos2 += 1
+        elif pos1<0:
+            res.append(A[pos2])
+            K -= 1
+            pos2 += 1
+        elif pos2>=N:
+            res.append(A[pos1])
+            K -= 1
+            pos1 -= 1
+    for ele in sorted(res):
+        S += str(ele)+' '
+    print(S)
+        
+if __name__ == '__main__':
+    N, K, X = map(int, input().rstrip().split())
+    A = list(map(int, input().rstrip().split()))
+    KClosestElements(A, N, K, X)
