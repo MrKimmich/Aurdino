@@ -1,0 +1,26 @@
+// Given an array A of N integers, and an integer K, write a program to find the length of minimum length subarray whose sum is greater than or equal to K
+
+
+def MinLength(A, N, K):
+    Window = []
+    res = N+1
+    Start = -1
+    while Start<N:
+        if sum(Window)<K:
+            Start += 1
+            if Start==N: break
+            Window.append(A[Start])
+        else:
+            if len(Window)<res:
+                res = len(Window)
+            Window.pop(0)
+    if res<N+1:
+        print(str(res))
+    else:
+        print(str(0))
+
+
+if __name__ == '__main__':
+    N, K = map(int, input().rstrip().split())
+    A = list(map(int, input().rstrip().split()))
+    MinLength(A, N, K)
